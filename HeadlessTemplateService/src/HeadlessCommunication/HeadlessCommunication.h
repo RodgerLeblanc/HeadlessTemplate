@@ -14,6 +14,7 @@
 
 #include <QObject>
 #include <QtNetwork/QUdpSocket>
+#include <bb/system/InvokeRequest>
 
 class HeadlessCommunication : public QObject
 {
@@ -29,6 +30,7 @@ public:
     Environment::Type getEnvironment();
 
 private slots:
+    void onInvoked(const bb::system::InvokeRequest&);
     void onReadyRead();
 
 private:

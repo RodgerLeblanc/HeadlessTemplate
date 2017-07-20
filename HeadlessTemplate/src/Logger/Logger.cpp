@@ -26,7 +26,6 @@ Logger::Logger(QObject* parent) :
 
 Logger::~Logger()
 {
-    log("~Logger()");
     save();
 }
 
@@ -112,6 +111,9 @@ void Logger::onReceivedData(QString reason, QVariant data) {
 
 void Logger::save()
 {
+    if (Logger::instance()->isInUiThread)
+        return;
+
     Helpers::safeWriteJsonFile(Logger::instance()->logMap, LOG_FILE);
 }
 

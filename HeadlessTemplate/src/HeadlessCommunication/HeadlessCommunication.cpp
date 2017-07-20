@@ -35,6 +35,13 @@ Environment::Type HeadlessCommunication::getEnvironment() {
     return this->environmentType;
 }
 
+void HeadlessCommunication::onInvoked(const bb::system::InvokeRequest& request) {
+    QString reason = request.action();
+    QVariant data = request.data();
+
+    emit receivedData(reason, data);
+}
+
 void HeadlessCommunication::onReadyRead()
 {
     while (socket->hasPendingDatagrams()) {

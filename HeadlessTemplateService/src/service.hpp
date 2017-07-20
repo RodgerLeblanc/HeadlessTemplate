@@ -43,7 +43,7 @@ public:
     virtual ~Service() {}
 
 private slots:
-    void onInvoked(const bb::system::InvokeRequest &);
+    void onInvoked(const bb::system::InvokeRequest&);
     void onReceivedData(QString reason, QVariant data);
 
 private:
