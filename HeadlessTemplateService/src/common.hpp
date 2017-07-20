@@ -38,7 +38,7 @@
 // Path to files
 #define LOG_FILE                                    "data/log.txt"
 #define SETTINGS_FILE                               "data/settings.json"
-#define LOG_SHAREWITH_PATH                          QDir::currentPath() + QString("/sharewith/pim/log.txt")
+#define LOG_SHAREWITH_PATH                          "sharewith/pim/log.txt"
 
 // Read and write default retry values
 #define READ_FILE_MAX_RETRY                         30
