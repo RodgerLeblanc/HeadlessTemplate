@@ -28,3 +28,12 @@ LIBS += -lbb -lbbdevice -lbbdata -lbbplatform -lbbsystem
 QT += network
 ```
 - Open Service/src/common.hpp and edit the first few lines to match your desired default values.
+```
+/*** ▼ ▼ ▼ CHANGE VALUES BETWEEN COMMENTS FOR EVERY NEW APP ▼ ▼ ▼ ***/
+#define PACKAGE_NAME                                QString("com.example.HeadlessTemplate")
+#define BUG_REPORT_EMAIL_TO                         QString("support@yourCompany.com")
+#define SHOULD_ALWAYS_KEEP_HEADLESS_ALIVE           false
+#define HEADLESS_COMMUNICATION_PORT_UI              14788
+#define HEADLESS_COMMUNICATION_PORT_HL              HEADLESS_COMMUNICATION_PORT_UI + 1
+/*** ▲ ▲ ▲ CHANGE VALUES BETWEEN COMMENTS FOR EVERY NEW APP ▲ ▲ ▲ ***/
+```
