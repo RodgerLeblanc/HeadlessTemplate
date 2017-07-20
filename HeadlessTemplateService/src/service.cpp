@@ -52,6 +52,7 @@ void Service::init() {
     notification = new Notification(this);
 
     connect(headlessCommunication, SIGNAL(receivedData(QString, QVariant)), this, SLOT(onReceivedData(QString, QVariant)));
+    invokeManager->connect(invokeManager, SIGNAL(invoked(const bb::system::InvokeRequest&)), headlessCommunication, SLOT(onInvoked(const bb::system::InvokeRequest&)));
     invokeManager->connect(invokeManager, SIGNAL(invoked(const bb::system::InvokeRequest&)), this, SLOT(onInvoked(const bb::system::InvokeRequest&)));
 
     NotificationDefaultApplicationSettings notificationDefaultApplicationSettings;
@@ -80,38 +81,27 @@ void Service::init() {
     LOG("******* Headless Started *******");
 }
 
-void Service::onInvoked(const bb::system::InvokeRequest & request)
+void Service::onInvoked(const bb::system::InvokeRequest& request)
 {
-    QString action = request.action().split(".").last();
+    Q_UNUSED(request);
+}
 
-    if (action == "TIMER_FIRED") {
+void Service::onReceivedData(QString reason, QVariant data) {
+    if (reason.split(".").last() == "TIMER_FIRED")
         return;
-    }
 
-    LOG("onInvoked()", request.action());
-
-    if (request.action() == HEADLESS_INVOCATION_SHUTDOWN_ACTION) {
+    if (reason == HEADLESS_INVOCATION_SHUTDOWN_ACTION) {
         bb::Application::instance()->quit();
     }
-    else if (request.action() == HEADLESS_INVOCATION_SEND_BUG_REPORT_ACTION) {
+    else if (reason == HEADLESS_INVOCATION_SEND_BUG_REPORT_ACTION) {
         Logger::save();
         headlessCommunication->sendMessage(LOG_READY_FOR_BUG_REPORT);
     }
-    else if (request.action() == HEADLESS_INVOCATION_SEND_LOG_TO_HUB_ACTION) {
+    else if (reason == HEADLESS_INVOCATION_SEND_LOG_TO_HUB_ACTION) {
         QString title = APP_NAME;
         QString body = STRING(Logger::getLog());
         notification->setTitle(title);
         notification->setBody(body);
         notification->notify();
     }
-}
-
-void Service::onReceivedData(QString reason, QVariant data) {
-    //Headless use invocation framework to receive data whenever possible.
-    //This allows the headless app to be restarted if it was not running
-    //when the data was sent from UI.
-    Q_UNUSED(reason);
-    Q_UNUSED(data);
-
-    qDebug() << "Service::onReceivedData()" << reason << data;
 }
