@@ -108,7 +108,7 @@ void ApplicationUI::onSystemLanguageChanged()
     QCoreApplication::instance()->removeTranslator(translator);
     // Initiate, load and install the application translation files.
     QString locale_string = QLocale().name();
-    QString file_name = QString("ScreenshotReloc_%1").arg(locale_string);
+    QString file_name = QString("%1_%2").arg(MOMENTICS_PROJECT_NAME, locale_string);
     if (translator->load(file_name, "app/native/qm")) {
     QCoreApplication::instance()->installTranslator(translator);
     }

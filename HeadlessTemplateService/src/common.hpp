@@ -12,6 +12,7 @@
 
 /*** ▼ ▼ ▼ CHANGE VALUES BETWEEN COMMENTS FOR EVERY NEW APP ▼ ▼ ▼ ***/
 #define PACKAGE_NAME                                QString("com.example.HeadlessTemplate")
+#define MOMENTICS_PROJECT_NAME                      QString("HeadlessTemplate")
 #define BUG_REPORT_EMAIL_TO                         QString("support@yourCompany.com")
 #define SHOULD_ALWAYS_KEEP_HEADLESS_ALIVE           false
 #define HEADLESS_COMMUNICATION_PORT_UI              14788

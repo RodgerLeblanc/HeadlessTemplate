@@ -5,36 +5,8 @@
  *      Author: Roger
  */
 
-/*
- *
- * Don't forget to add this to your PRO file :
- * LIBS += -lbbdata
- *
- *
- * This is a custom object that can be used as a basic alternative to QSettings.
- * It stores everything in a JSON file. This can be helful for performance as
- * JSON is faster than QSettings in most case, and even in Ekke's tests, JSON was
- * the best choice between JSON, XML and SQL.
- *
- * To add this object to your project, follow these steps :
- * 1- Copy both Settings.cpp and Settings.h to your src folder
- * 2- In your applicationui.hpp, add those lines :
- *      #include "Settings.h"
- *
- *      private:
- *          Settings *settings;
- *
- * 3- In your application.cpp, add those lines :
- *      (in constructor)
- *      settings = new Settings(Environment::UI, this);
- *          ...
- *      QmlDocument *qml = QmlDocument::create("asset:///main.qml").parent(this);
- *      qml->setContextProperty("_settings", settings);
- *
- *
- */
-
 #include <src/Settings/Settings.h>
+
 #include <QDebug>
 #include <QFile>
 #include <bb/system/InvokeManager>

@@ -4,17 +4,17 @@
 <context>
     <name>ApplicationUI</name>
     <message>
-        <location filename="../src/applicationui.cpp" line="135"/>
+        <location filename="../src/applicationui.cpp" line="132"/>
         <source>Bug Report for </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/applicationui.cpp" line="136"/>
+        <location filename="../src/applicationui.cpp" line="133"/>
         <source>Hi </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/applicationui.cpp" line="136"/>
+        <location filename="../src/applicationui.cpp" line="133"/>
         <source>, I&apos;ve found this bug in the app:
 
 

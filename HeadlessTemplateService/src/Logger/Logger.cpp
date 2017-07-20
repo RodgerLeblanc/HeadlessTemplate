@@ -5,24 +5,8 @@
  *      Author: Roger
  */
 
-/*
- *
- * To add this object to your project, follow these steps :
- * 1- Copy Logger folder to your src folder
- * 2- In your applicationui.hpp or service.hpp, add those lines :
- *      #include <src/Logger/Logger.h>
- *
- * 3- Use it anywhere in your cpp file using the macro, it accepts
- * any number of arguments of QVariant type :
- *      LOG("Hello World!", 123, true, QDateTime::currentDateTime());
- *
- * There's also two other macros available :
- *      LOG_VAR(x)  ===> will log {variable name}: {variable value}
- *      STRING(x)   ===> will convert any QVariant to QString
- *
- */
-
 #include <src/Logger/Logger.h>
+
 #include <QDebug>
 #include <QFile>
 
