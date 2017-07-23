@@ -144,7 +144,7 @@ void ApplicationUI::sendBugReport() {
 
     Helpers::safeWriteJsonFile(logMap, LOG_SHAREWITH_PATH);
 
-    data["attachment"] = LOG_SHAREWITH_PATH;
+    data["attachment"] = QDir::currentPath() + "/" + LOG_SHAREWITH_PATH;
     QVariantMap moreData;
     moreData.insert("data", data);
 
