@@ -142,8 +142,7 @@ void ApplicationUI::sendBugReport() {
     logMap.insert("log", log);
     logMap.insert("settings", userSettings);
 
-    JsonDataAccess jda;
-    jda.save(logMap, LOG_SHAREWITH_PATH);
+    Helpers::safeWriteJsonFile(logMap, LOG_SHAREWITH_PATH);
 
     data["attachment"] = LOG_SHAREWITH_PATH;
     QVariantMap moreData;

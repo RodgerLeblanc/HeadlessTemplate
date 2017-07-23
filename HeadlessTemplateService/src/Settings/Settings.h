@@ -30,11 +30,17 @@ class Settings : public QObject
     Q_PROPERTY(QVariantMap allSettings READ allSettings NOTIFY allSettingsChanged);
 
 public:
+    static Settings* instance() {
+        return Settings::instance(NULL, NULL);
+    }
+
     static Settings *instance(HeadlessCommunication* headlessCommunication, QObject* parent = NULL) {
         static Settings *instance;
 
         if (!instance)
             instance = new Settings(headlessCommunication, parent);
+
+        Q_ASSERT(instance->settingsCommunication != NULL);
 
         return instance;
     }
