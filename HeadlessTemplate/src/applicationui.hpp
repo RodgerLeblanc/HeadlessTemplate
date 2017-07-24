@@ -53,6 +53,7 @@ public:
     Q_INVOKABLE void shutdown();
 
 private slots:
+    void checkForChangelog();
     void onReceivedData(QString reason, QVariant data);
     void onSystemLanguageChanged();
 
@@ -68,6 +69,9 @@ private:
 
     Environment::Type environment;
     QString supportEmail;
+
+signals:
+    void newChangelog(QString);
 };
 
 #endif /* ApplicationUI_HPP_ */

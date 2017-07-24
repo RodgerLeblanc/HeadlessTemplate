@@ -25,6 +25,7 @@
 #include <bb/PpsObject>
 #include <QMutex>
 #include <QMutexLocker>
+#include <QTimer>
 #include <bb/data/JsonDataAccess>
 
 #include <bb/PackageInfo>
@@ -61,23 +62,57 @@ ApplicationUI::ApplicationUI() :
     init();
 }
 
+void ApplicationUI::checkForChangelog() {
+    if (settings->contains(SETTINGS_LAST_VERSION_LOADED)) {
+        QVariantMap changelogMap = Helpers::safeReadJsonFile(CHANGELOG_FILE).toMap();
+        QStringList lastVersionLoadedInSettings = settings->value(SETTINGS_LAST_VERSION_LOADED).toString().split(".");
+
+        QString newChangelogForThisUser;
+
+        QStringList changelogVersions = changelogMap.keys();
+        foreach(QString changelog, changelogVersions) {
+            QStringList changelogVersion = changelog.split(".");
+
+            bool showThisChangelog = false;
+            int maxSize = qMax(changelogVersion.size(), lastVersionLoadedInSettings.size());
+
+            for (int i = 0; i < maxSize; i++) {
+                if (changelogVersion[i].toInt() > lastVersionLoadedInSettings[i].toInt()) {
+                    showThisChangelog = true;
+                    break;
+                }
+                else {
+                    if (changelogVersion[i].toInt() < lastVersionLoadedInSettings[i].toInt()) {
+                        break;
+                    }
+                }
+            }
+
+            if (showThisChangelog) {
+                newChangelogForThisUser.prepend(changelog + "\n" + changelogMap[changelog].toString() + "\n\n");
+            }
+        }
+        if (!newChangelogForThisUser.isEmpty())
+            emit newChangelog(newChangelogForThisUser);
+    }
+
+    settings->setValue(SETTINGS_LAST_VERSION_LOADED, APP_VERSION);
+}
+
 void ApplicationUI::init() {
     invokeManager = new InvokeManager(this);
     localeHandler = new LocaleHandler(this);
     translator = new QTranslator(this);
 
     connect(headlessCommunication, SIGNAL(receivedData(QString, QVariant)), this, SLOT(onReceivedData(QString, QVariant)));
+    connect(localeHandler, SIGNAL(systemLanguageChanged()), this, SLOT(onSystemLanguageChanged()));
 
-    // prepare the localization
-    if (!QObject::connect(localeHandler, SIGNAL(systemLanguageChanged()),
-            this, SLOT(onSystemLanguageChanged()))) {
-        // This is an abnormal situation! Something went wrong!
-        // Add own code to recover here
-        qWarning() << "Recovering from a failed connect()";
-    }
-
-    // initial load
     onSystemLanguageChanged();
+
+    // Registering QTimer for easy QML access. We add it to bb.cascades to avoid having to import
+    // a separate library for such a tiny addition. (Don't worry, it won't slow down your bb.cascades
+    // library loading)
+    qmlRegisterType<QTimer>("bb.cascades", 1, 0, "QTimer");
 
     QmlDocument *qml = QmlDocument::create("asset:///main.qml").parent(this);
     qml->setContextProperty("app", this);
@@ -86,6 +121,8 @@ void ApplicationUI::init() {
     Application::instance()->setScene(root);
 
     LOG("******* UI Started *******");
+
+    QMetaObject::invokeMethod(this, "checkForChangelog", Qt::QueuedConnection);
 }
 
 void ApplicationUI::invokeHL(QString action) {

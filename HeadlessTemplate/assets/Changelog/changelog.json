@@ -1,0 +1,19 @@
+{
+	"1.0.0.1" : "2017/07/23
+
+- Added Changelog tool.
+(This changelog will only show for those who already had any of the previous version installed)
+
+(It's the developer's job to ensure this json file is valid json, you should check it with an online json parser to make sure it's valid before publishing, otherwise the changelog won't show at all)
+",
+	"0.0.0.2" : "2017/07/20
+
+- Added Settings, inter-process communication and Logging tool.
+(This changelog will only show for those who already had the version 0.0.0.1 installed)
+",
+	"0.0.0.1" : "2017/07/18
+
+- Initial commit
+(This changelog will not show for anyone)
+"
+}

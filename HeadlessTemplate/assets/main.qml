@@ -15,8 +15,34 @@
  */
 
 import bb.cascades 1.4
+import "Changelog"
 
 Page {
+    onCreationCompleted: {
+        app.newChangelog.connect(onNewChangelog)
+    }
+    
+    function onNewChangelog(newChangelogForThisUser) {
+        console.log("onNewChangelog: " + newChangelogForThisUser)
+        var createdControl = changelogSheet.createObject()
+        createdControl.changelogText = newChangelogForThisUser
+
+        //If you don't specify countdownSeconds, it will default to 10 
+        createdControl.countdownSeconds = 5
+
+        //If you don't specify colors, it will default to white background with black border and text
+        createdControl.changelogOuterBackground = Color.Magenta
+        createdControl.changelogBorderColor = Color.Cyan
+        createdControl.changelogInnerBackground = Color.LightGray
+        createdControl.changelogTextColor = Color.DarkBlue
+                
+        createdControl.open()
+    }
+    
+    attachedObjects: [
+        ComponentDefinition { id: changelogSheet; ChangelogSheet {} }
+    ]
+
     Container {
         layout: DockLayout {}
         horizontalAlignment: HorizontalAlignment.Fill
