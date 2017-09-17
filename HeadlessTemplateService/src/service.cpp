@@ -68,7 +68,7 @@ void Service::init() {
         InvokeRecurrenceRule recurrenceRule(bb::system::InvokeRecurrenceRuleFrequency::Minutely);
         recurrenceRule.setInterval(6); // Minimum valid interval for Minutely frequency
         if (recurrenceRule.isValid()) {
-            InvokeTimerRequest invokeTimerRequest("registerTimerName", recurrenceRule, HEADLESS_INVOCATION_TARGET);
+            InvokeTimerRequest invokeTimerRequest(registerTimerName, recurrenceRule, HEADLESS_INVOCATION_TARGET);
             InvokeReply* reply = invokeManager->registerTimer(invokeTimerRequest);
             connect(reply, SIGNAL(finished()), reply, SLOT(deleteLater()));
         }
