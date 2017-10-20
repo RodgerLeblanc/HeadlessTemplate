@@ -51,6 +51,20 @@ Page {
         Container {
             horizontalAlignment: HorizontalAlignment.Center
             verticalAlignment: VerticalAlignment.Center
+            Container {
+                layout: StackLayout { orientation: LayoutOrientation.LeftToRight }
+                horizontalAlignment: HorizontalAlignment.Center
+                ToggleButton {
+                    checked: settings.value("checked", false)
+                    verticalAlignment: VerticalAlignment.Center
+                    onCheckedChanged: settings.setValue("checked", checked)
+                }
+                Label {
+                    //Supports Q_PROPERTY notifications using the 'allSettings' property
+                    text: "Settings value for 'checked': " + settings.allSettings["checked"]
+                    verticalAlignment: VerticalAlignment.Center
+                }
+            }
             Button {
                 text: qsTr("HeadlessCommunication test") + Retranslate.onLocaleOrLanguageChanged
                 horizontalAlignment: HorizontalAlignment.Center

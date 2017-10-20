@@ -19,7 +19,7 @@ Settings::Settings(HeadlessCommunication* headlessCommunication, QObject* parent
     isInUiThread(headlessCommunication->getEnvironment() == Environment::UI)
 {
     // Load the settings file on startup.
-    sync();
+    this->sync();
 
     connect(settingsCommunication, SIGNAL(receivedData(QString, QVariant)), this, SLOT(onReceivedData(QString, QVariant)));
 }
@@ -27,7 +27,7 @@ Settings::Settings(HeadlessCommunication* headlessCommunication, QObject* parent
 Settings::~Settings()
 {
     // Save the settings file on exit.
-    save();
+    this->save();
 }
 
 QStringList Settings::allKeys()
@@ -46,7 +46,7 @@ void Settings::clear()
         settingsCommunication->sendMessage(SETTINGS_CLEAR);
     }
     else {
-        save();
+        this->save();
     }
 }
 
@@ -64,7 +64,7 @@ QString Settings::fileName()
 
 void Settings::onReceivedData(QString reason, QVariant data) {
     if (reason == SETTINGS_FILE_UPDATED) {
-        sync();
+        this->sync();
     }
 
     // Only headless should perform the next if (reason == xxx)
@@ -98,7 +98,7 @@ int Settings::remove(const QString &key)
         settingsCommunication->sendMessage(SETTINGS_REMOVE_KEY, key);
     }
     else {
-        save();
+        this->save();
     }
 
     return numberRemoved;
@@ -131,7 +131,7 @@ void Settings::setValue(const QString &key, const QVariant &value)
         settingsCommunication->sendMessage(SETTINGS_SAVE_THIS, map);
     }
     else {
-        save();
+        this->save();
     }
 }
 

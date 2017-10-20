@@ -40,22 +40,17 @@ Here&apos;s the steps to reproduce:
 <context>
     <name>main</name>
     <message>
-        <location filename="../assets/main.qml" line="28"/>
-        <source>Changelog</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../assets/main.qml" line="55"/>
+        <location filename="../assets/main.qml" line="29"/>
         <source>HeadlessCommunication test</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="62"/>
+        <location filename="../assets/main.qml" line="36"/>
         <source>Send bug report</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="69"/>
+        <location filename="../assets/main.qml" line="43"/>
         <source>Shutdown</source>
         <translation type="unfinished"></translation>
     </message>
