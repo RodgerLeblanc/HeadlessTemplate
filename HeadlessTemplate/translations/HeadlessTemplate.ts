@@ -27,17 +27,17 @@ Here&apos;s the steps to reproduce:
 <context>
     <name>main</name>
     <message>
-        <location filename="../assets/main.qml" line="29"/>
+        <location filename="../assets/main.qml" line="43"/>
         <source>HeadlessCommunication test</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="36"/>
+        <location filename="../assets/main.qml" line="50"/>
         <source>Send bug report</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="43"/>
+        <location filename="../assets/main.qml" line="57"/>
         <source>Shutdown</source>
         <translation type="unfinished"></translation>
     </message>
