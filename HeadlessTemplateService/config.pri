@@ -5,11 +5,9 @@ device {
     CONFIG(debug, debug|release) {
         profile {
             CONFIG += \
-                config_pri_assets \
                 config_pri_source_group1
         } else {
             CONFIG += \
-                config_pri_assets \
                 config_pri_source_group1
         }
 
@@ -18,7 +16,6 @@ device {
     CONFIG(release, debug|release) {
         !profile {
             CONFIG += \
-                config_pri_assets \
                 config_pri_source_group1
         }
     }
@@ -28,7 +25,6 @@ simulator {
     CONFIG(debug, debug|release) {
         !profile {
             CONFIG += \
-                config_pri_assets \
                 config_pri_source_group1
         }
     }
@@ -51,6 +47,12 @@ config_pri_source_group1 {
         $$quote($$BASEDIR/src/helpers.hpp) \
         $$quote($$BASEDIR/src/service.hpp)
 }
+
+INCLUDEPATH += $$quote($$BASEDIR/src/Logger) \
+    $$quote($$BASEDIR/src/Logger/HeapUsage) \
+    $$quote($$BASEDIR/src/Settings) \
+    $$quote($$BASEDIR/src) \
+    $$quote($$BASEDIR/src/HeadlessCommunication)
 
 CONFIG += precompile_header
 

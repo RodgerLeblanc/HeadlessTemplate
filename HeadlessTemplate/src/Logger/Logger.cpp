@@ -75,6 +75,8 @@ void Logger::logFinal(QString message) {
         return;
     }
 
+    qDebug() << message;
+
     QStringList log = logger->logMap["log"].toStringList();
     log.prepend(QTime::currentTime().toString(TIME_TO_STRING) + " " + QString::number(HeapUsage::measureMem()) + " " + message);
 

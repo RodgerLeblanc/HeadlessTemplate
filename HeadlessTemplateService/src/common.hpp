@@ -39,6 +39,7 @@
 #define LOG_FILE                                    "data/log.txt"
 #define SETTINGS_FILE                               "data/settings.json"
 #define LOG_SHAREWITH_PATH                          "sharewith/pim/log.txt"
+#define CHANGELOG_FILE                              "app/native/assets/Changelog/changelog.json"
 
 // Read and write default retry values
 #define READ_FILE_MAX_RETRY                         30
@@ -58,6 +59,7 @@
 #define SETTINGS_SAVE_THIS                          QString("SETTINGS_SAVE_THIS")
 #define SETTINGS_FILE_UPDATED                       QString("SETTINGS_FILE_UPDATED")
 #define SETTINGS_INSTALLED_DATE                     QString("SETTINGS_INSTALLED_DATE")
+#define SETTINGS_LAST_VERSION_LOADED                QString("SETTINGS_LAST_VERSION_LOADED")
 
 // Default toString() format for DateTime and Time
 #define DATETIME_TO_STRING                          "yyyy/MM/dd hh:mm:ss"

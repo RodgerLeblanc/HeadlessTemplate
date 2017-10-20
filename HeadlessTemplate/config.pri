@@ -35,7 +35,11 @@ simulator {
 }
 
 config_pri_assets {
-    OTHER_FILES += $$quote($$BASEDIR/assets/main.qml)
+    OTHER_FILES += \
+        $$quote($$BASEDIR/assets/Changelog/ChangelogContainer.qml) \
+        $$quote($$BASEDIR/assets/Changelog/ChangelogSheet.qml) \
+        $$quote($$BASEDIR/assets/Changelog/changelog.json) \
+        $$quote($$BASEDIR/assets/main.qml)
 }
 
 config_pri_source_group1 {
@@ -53,6 +57,12 @@ config_pri_source_group1 {
         $$quote($$BASEDIR/src/Settings/Settings.h) \
         $$quote($$BASEDIR/src/applicationui.hpp)
 }
+
+INCLUDEPATH += $$quote($$BASEDIR/src/Logger) \
+    $$quote($$BASEDIR/src/Logger/HeapUsage) \
+    $$quote($$BASEDIR/src/Settings) \
+    $$quote($$BASEDIR/src) \
+    $$quote($$BASEDIR/src/HeadlessCommunication)
 
 CONFIG += precompile_header
 
@@ -87,7 +97,10 @@ lupdate_inclusion {
         $$quote($$BASEDIR/../src/Settings/*.cxx) \
         $$quote($$BASEDIR/../assets/*.qml) \
         $$quote($$BASEDIR/../assets/*.js) \
-        $$quote($$BASEDIR/../assets/*.qs)
+        $$quote($$BASEDIR/../assets/*.qs) \
+        $$quote($$BASEDIR/../assets/Changelog/*.qml) \
+        $$quote($$BASEDIR/../assets/Changelog/*.js) \
+        $$quote($$BASEDIR/../assets/Changelog/*.qs)
 
     HEADERS += \
         $$quote($$BASEDIR/../src/*.h) \
